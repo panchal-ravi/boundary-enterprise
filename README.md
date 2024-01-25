@@ -32,10 +32,10 @@ terraform apply -auto-approve -target module.k8s-target
 
 ## Destroy Environment
 ```
-terraform apply -auto-approve -target module.k8s-target
-terraform apply -auto-approve -target module.k8s-cluster
-terraform apply -auto-approve -target module.rdp-target
-terraform apply -auto-approve -target module.db-target
+terraform destroy -auto-approve -target module.k8s-target
+terraform destroy -auto-approve -target module.k8s-cluster
+terraform destroy -auto-approve -target module.rdp-target
+terraform destroy -auto-approve -target module.db-target
 terraform state rm "module.ssh-target.boundary_storage_bucket.aws"
 terraform state rm 'module.boundary-resources.boundary_scope.org'
 terraform destroy -auto-approve -target module.ssh-target
