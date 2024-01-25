@@ -49,11 +49,11 @@ provider "vault" {
 # The Kubernetes provider is included here so the EKS module can complete successfully. Otherwise, it throws an error when creating `kubernetes_config_map.aws_auth`.
 # Retrieve EKS cluster configuration
 data "aws_eks_cluster" "cluster" {
-  name = module.k8s-cluster[0].eks_cluster_id
+  name = module.k8s-cluster.eks_cluster_id
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.k8s-cluster[0].eks_cluster_id
+  name = module.k8s-cluster.eks_cluster_id
 }
 
 provider "kubernetes" {

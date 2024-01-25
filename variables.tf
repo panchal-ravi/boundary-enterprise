@@ -73,23 +73,3 @@ variable "boundary_root_username" {
 variable "boundary_root_password" {
   type = string
 }
-
-variable "ssh_target" {
-  type    = bool
-  default = false
-}
-
-variable "db_target" {
-  type    = bool
-  default = false
-}
-
-variable "rdp_target" {
-  type    = bool
-  default = false
-}
-
-variable "k8s_target" {
-  type    = bool
-  default = false
-}

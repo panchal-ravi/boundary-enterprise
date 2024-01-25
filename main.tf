@@ -41,7 +41,6 @@ module "boundary-resources" {
 }
 
 module "ssh-target" {
-  count              = var.ssh_target ? 1 : 0
   source             = "./modules/boundary/targets/ssh-target"
   deployment_id      = local.deployment_id
   owner              = var.owner
@@ -50,7 +49,6 @@ module "ssh-target" {
 }
 
 module "rdp-target" {
-  count              = var.rdp_target ? 1 : 0
   source             = "./modules/boundary/targets/rdp-target"
   owner              = var.owner
   deployment_id      = local.deployment_id
@@ -59,7 +57,6 @@ module "rdp-target" {
 }
 
 module "db-target" {
-  count              = var.db_target ? 1 : 0
   source             = "./modules/boundary/targets/db-target"
   deployment_id      = local.deployment_id
   infra_aws          = module.boundary-cluster.infra_aws
@@ -67,7 +64,6 @@ module "db-target" {
 }
 
 module "k8s-cluster" {
-  count         = var.k8s_target ? 1 : 0
   source        = "./modules/infra/aws/k8s"
   owner         = var.owner
   region        = var.aws_region
@@ -77,12 +73,11 @@ module "k8s-cluster" {
 
 
 module "k8s-target" {
-  count              = var.k8s_target ? 1 : 0
   source             = "./modules/boundary/targets/k8s-target"
   owner              = var.owner
   region             = var.aws_region
   deployment_id      = local.deployment_id
-  eks_cluster_id     = module.k8s-cluster[0].eks_cluster_id
+  eks_cluster_id     = module.k8s-cluster.eks_cluster_id
   infra_aws          = module.boundary-cluster.infra_aws
   boundary_resources = module.boundary-resources.resources
 }
